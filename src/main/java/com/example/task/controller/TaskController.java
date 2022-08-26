@@ -57,12 +57,12 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.updateTask(dto));
     }
 
-    @PatchMapping("/updateCompleted/{id}")
+    @PatchMapping("/update/completed/{id}")
     public ResponseEntity<Task> updateCompleted(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.updateCompleted(id));
     }
     
-    @PatchMapping("/updateCondition/{id}")
+    @PatchMapping("/update/condition/{id}")
     public ResponseEntity<Task> updateCondition(@PathVariable Long id, @RequestParam(value="condition") String nameCondition) {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.updateByCondition(id, nameCondition));
     }

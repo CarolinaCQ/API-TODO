@@ -38,7 +38,9 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll()
-                .anyRequest().permitAll(); //falta establecer las autorizaciones
+                .antMatchers("/conditions/**", "/roles/**", "/users/**").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/tasks/create/**", "/tasks/update/**", "/tasks/delete/**", "/tasks/add-user/**").hasAnyAuthority("ROLE_ADMIN")
+                .anyRequest().permitAll();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
