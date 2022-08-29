@@ -2,14 +2,13 @@ package com.example.task.mapper;
 
 import com.example.task.dto.TaskDtoCreate;
 import com.example.task.entity.Task;
-import com.example.task.entity.Condition;
-import com.example.task.exception.MyException;
+import com.example.task.entity.User;
 import com.example.task.repository.ConditionRepository;
+import com.example.task.repository.UserRepository;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.time.Period;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Component;
 public class TaskDtoToTask implements Function<TaskDtoCreate, Task> {
 
     private final ConditionRepository conditionRepository;
+    private final UserRepository userRepository;
     
     @Override
     public Task apply(TaskDtoCreate dto) {
@@ -27,15 +27,20 @@ public class TaskDtoToTask implements Function<TaskDtoCreate, Task> {
         task.setDescription(dto.getDescription());
         task.setStartDate(LocalDate.now());
         task.setFinishDate(dto.getFinishDate());
-        if (!Objects.isNull(dto.getDurationInDays())) {
-            if (dto.getDurationInDays() < 0) {
-                throw new MyException("The duration in days must be greater than zero", HttpStatus.BAD_REQUEST);
-            }
-            task.setDurationInDays(dto.getDurationInDays());
-        }
+        
+        Period period = Period.between(dto.getFinishDate(), LocalDate.now());
+        Integer durationInDays = period.getDays();
+        task.setDurationInDays(durationInDays);
+        
         task.setCompleted(false);
-        Condition condition = conditionRepository.findById(1L).get();
-        task.setCondition(condition);
+        task.setDeleted(false);
+        //Condition condition = conditionRepository.findById(1L).get();
+        //task.setCondition(condition);
+        
+        User user = userRepository.findById(dto.getIdUser()).get();
+        task.setUser(user);
+        user.getListTasks().add(task);
+        
         
         return task;
 

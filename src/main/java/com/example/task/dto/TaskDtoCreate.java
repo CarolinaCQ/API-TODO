@@ -15,5 +15,5 @@ public class TaskDtoCreate {
     private String title;
     private String description;
     private LocalDate finishDate;
-    private Integer durationInDays;
+    private Long idUser;
 }

@@ -46,17 +46,6 @@ public class TaskServiceImplementation implements TaskService {
         return taskRepository.save(mapper.apply(dto));
     }
 
-    @Override
-    @Transactional
-    public Task addUserToTask(String username, Long idTask) {
-        if (!taskRepository.existsById(idTask)) {
-            throw new MyException("Task not found.", HttpStatus.NOT_FOUND);
-        }
-        Task task = taskRepository.findById(idTask).get();
-        task.setUser(userService.getUserByUsername(username));
-        userService.addTaskToUser(task, username);
-        return taskRepository.findById(idTask).get();
-    }
     
     @Override 
     @Transactional

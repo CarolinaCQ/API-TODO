@@ -46,11 +46,6 @@ public class TaskController {
     public ResponseEntity<Task> createTask(@RequestBody TaskDtoCreate dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(dto));
     }
-
-    @PostMapping("/add-user/{id}")
-    public ResponseEntity<Task> createTask(@PathVariable Long id, @RequestParam String username){
-        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.addUserToTask(username, id));
-    }
     
     @PutMapping("/update")
     public ResponseEntity<Task> updateTask(@RequestBody TaskDtoUpdate dto) {

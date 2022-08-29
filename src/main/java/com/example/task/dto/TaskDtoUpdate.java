@@ -16,5 +16,5 @@ public class TaskDtoUpdate {
     private String title;
     private String description;
     private LocalDate finishDate;
-    private Integer durationInDays;
+    private LocalDate startDate;
 }

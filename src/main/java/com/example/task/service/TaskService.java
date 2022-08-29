@@ -11,7 +11,6 @@ public interface TaskService {
     Task getTaskById(Long id);
     List<Task> getAllTasksByCondition(String name);
     Task createTask(TaskDtoCreate dto);
-    Task addUserToTask(String username, Long idTask);
     Task updateTask(TaskDtoUpdate dto);
     Task updateCompleted(Long id);
     Task updateByCondition(Long id, String nameCondition);

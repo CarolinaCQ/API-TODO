@@ -1,12 +1,5 @@
 package com.example.task;
 
-import com.example.task.entity.Task;
-import com.example.task.entity.Condition;
-import com.example.task.mapper.TaskDtoToTask;
-import com.example.task.mapper.TaskDtoToTaskUpdate;
-import com.example.task.repository.TaskRepository;
-import java.time.LocalDate;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -32,22 +25,4 @@ public class TaskApplication {
         };
     }
     
-//
-//        @Bean
-//        CommandLineRunner commandLineRunner (TaskRepository taskRepository){
-//            return args -> {
-//                Task task = new Task(
-//                        1L,
-//                        "Tarea",
-//                        "Lavar",
-//                        LocalDate.now(),
-//                        LocalDate.now(),
-//                        1,
-//                        false,
-//                        Condition
-//                );
-//                
-//                taskRepository.save(task);
-//            };
-//        }
 }

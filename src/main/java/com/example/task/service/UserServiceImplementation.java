@@ -43,16 +43,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         }
         return userRepository.save(mapper.apply(dto));
     }
-
-    @Override
-    @Transactional
-    public void addTaskToUser(Task task, String username) {
-        if (!userRepository.existsByUsername(username)) {
-            throw new MyException("Invalid, this username already exists", HttpStatus.BAD_REQUEST);
-        }
-        User user = userRepository.findByUsername(username).get();
-        user.getListTasks().add(task);
-    }
+    
 
     @Override
     @Transactional
