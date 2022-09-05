@@ -42,7 +42,19 @@ public class RoleServiceImplementation implements RoleService{
     @Override
     @Transactional
     public void deleteRole(Long id) {
+        if(!roleRepository.existsById(id)){
+            throw new MyException("Role not found", HttpStatus.NOT_FOUND);
+        }
         roleRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void recoverDeletedRole(Long id) {
+        if(!roleRepository.existsById(id)){
+            throw new MyException("Role not found", HttpStatus.NOT_FOUND);
+        }
+        roleRepository.recoverDeletedRole(id);
     }
     
     

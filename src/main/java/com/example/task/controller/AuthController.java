@@ -37,9 +37,4 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(dto));
     }
     
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
 }

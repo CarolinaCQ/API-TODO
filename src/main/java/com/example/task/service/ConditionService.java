@@ -8,4 +8,5 @@ public interface ConditionService {
     Condition getConditionByName(String name);
     Condition createCondition(ConditionDto condition);
     void deleteCondition(Long id);
+    void recoverDeletedCondition(Long id);
 }

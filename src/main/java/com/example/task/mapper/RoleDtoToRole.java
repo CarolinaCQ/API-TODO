@@ -13,6 +13,7 @@ public class RoleDtoToRole implements Function<RoleDto, Role> {
         
         Role role = new Role();
         role.setName(dto.getName());
+        role.setDeleted(false);
         
         return role;
     }

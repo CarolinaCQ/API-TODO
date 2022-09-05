@@ -13,6 +13,7 @@ public class ConditionDtoToCondition implements Function<ConditionDto, Condition
         
         Condition condition = new Condition();
         condition.setName(dto.getName());
+        condition.setDeleted(false);
         
         return condition;
     }

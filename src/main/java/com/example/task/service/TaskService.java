@@ -15,4 +15,5 @@ public interface TaskService {
     Task updateCompleted(Long id);
     Task updateByCondition(Long id, String nameCondition);
     void deleteTask(Long id);
+    void recoverDeletedTask(Long id);
 }

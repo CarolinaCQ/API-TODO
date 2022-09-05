@@ -1,7 +1,5 @@
 package com.example.task.entity;
 
-import com.example.task.exception.MyException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -56,7 +54,7 @@ public class Task implements Serializable {
     private Boolean deleted;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "task_condition",  referencedColumnName = "taskCondition_id")
+    @JoinColumn(name = "task_condition",  referencedColumnName = "condition_id")
     private Condition condition;
 
     @ManyToOne(fetch = FetchType.EAGER)

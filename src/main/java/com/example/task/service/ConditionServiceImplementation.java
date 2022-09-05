@@ -39,4 +39,12 @@ public class ConditionServiceImplementation implements ConditionService {
         conditionRepository.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public void recoverDeletedCondition(Long id) {
+        if (!conditionRepository.existsById(id)) {
+            throw new MyException("Condition not found.", HttpStatus.NOT_FOUND);
+        }
+        conditionRepository.recoverDeletedCondition(id);
+    }
 }

@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Setter
 @Getter
+@SQLDelete(sql = "UPDATE roles SET role_deleted=TRUE WHERE role_id=?")
 @Table(name = "roles")
 public class Role implements Serializable {
 
@@ -23,5 +25,8 @@ public class Role implements Serializable {
 
     @Column(name = "role_name", nullable = false, unique = true)
     private String name;
+    
+    @Column(name = "role_deleted")
+    private Boolean deleted;
 
 }

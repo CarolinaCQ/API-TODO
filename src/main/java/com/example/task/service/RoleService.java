@@ -10,4 +10,5 @@ public interface RoleService {
     Role createRole(RoleDto role);
     List<Role> addRoleToUser(List<Long> listRolesId);
     void deleteRole(Long id);
+    void recoverDeletedRole(Long id);
 }

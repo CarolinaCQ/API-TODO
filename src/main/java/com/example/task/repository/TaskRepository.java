@@ -23,4 +23,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("SELECT t FROM Task t WHERE t.condition.name=:name")
     public List<Task> findByNameTaskCondition(@Param("name") String name);
 
+    @Modifying
+    @Query("UPDATE Task t SET t.deleted=FALSE WHERE id=:id")
+    public void recoverDeletedTask(@Param("id") Long id);
 }

@@ -1,16 +1,15 @@
 package com.example.task.controller;
 
-import com.example.task.dto.ConditionDto;
 import com.example.task.dto.TaskDtoCreate;
 import com.example.task.dto.TaskDtoUpdate;
 import com.example.task.entity.Task;
-import com.example.task.entity.Condition;
 import com.example.task.service.ConditionServiceImplementation;
 import com.example.task.service.TaskServiceImplementation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,7 +61,13 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.updateByCondition(id, nameCondition));
     }
 
-    @PostMapping("/delete/{id}")
+    @PatchMapping("/recover/{id}")
+    public ResponseEntity<Void> recoverDeletedTask(@PathVariable Long id) {
+        taskService.recoverDeletedTask(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build();

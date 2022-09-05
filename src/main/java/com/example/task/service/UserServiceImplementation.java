@@ -1,7 +1,6 @@
 package com.example.task.service;
 
 import com.example.task.dto.UserDto;
-import com.example.task.entity.Task;
 import com.example.task.entity.User;
 import com.example.task.exception.MyException;
 import com.example.task.mapper.UserDtoToUser;
@@ -48,8 +47,21 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     @Override
     @Transactional
     public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new MyException("This username not found", HttpStatus.NOT_FOUND);
+        }
         userRepository.deleteById(id);
     }
+    
+    @Override
+    @Transactional
+    public void recoverDeletedUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new MyException("This username not found", HttpStatus.NOT_FOUND);
+        }
+        userRepository.recoverDeletedUser(id);
+    }
+    
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

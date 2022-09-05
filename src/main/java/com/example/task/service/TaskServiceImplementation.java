@@ -83,4 +83,13 @@ public class TaskServiceImplementation implements TaskService {
         taskRepository.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public void recoverDeletedTask(Long id) {
+        if (!taskRepository.existsById(id)) {
+            throw new MyException("Task not found.", HttpStatus.NOT_FOUND);
+        }
+        taskRepository.recoverDeletedTask(id);
+    }
+
 }

@@ -16,11 +16,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE users SET user_deleted=TRUE WHERE user_id=?")
 @Table(name = "users")
 public class User implements Serializable {
     
@@ -34,6 +36,9 @@ public class User implements Serializable {
     
     @Column(name = "user_password", nullable = false)
     private String password;
+    
+    @Column(name = "user_deleted")
+    private Boolean deleted;
     
     @ManyToMany(fetch = EAGER)
     private List<Role> roles;

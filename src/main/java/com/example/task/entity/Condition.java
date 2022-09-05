@@ -11,21 +11,26 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE conditions SET condition_deleted=TRUE WHERE condition_id=?")
 @Entity
-@Table(name = "taskCondition")
+@Table(name = "conditions")
 public class Condition implements Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "taskCondition_id")
+    @Column(name = "condition_id")
     private Long id;
 
-    @Column(name = "taskCondition_name", nullable = false, unique = true)
+    @Column(name = "condition_name", nullable = false, unique = true)
     private String name;
+    
+    @Column(name = "condition_deleted")
+    private Boolean deleted;
 
 }
